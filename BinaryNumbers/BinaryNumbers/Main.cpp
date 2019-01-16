@@ -10,9 +10,11 @@ int main()
 		revBinNum.emplace_back(n % 2);
 		n /= 2;
 	};
-	for (auto it = revBinNum.rbegin(); it > = revBinNum.begin(); --it) {
-		
+	if (n == 1)
+		revBinNum.emplace_back(1);
+	for (auto it = revBinNum.rbegin(); it != revBinNum.rend(); ++it) {
+		std::cout << static_cast<int>(*it);
 	}
-	system("pause");
+	/*system("pause");*/
 	return 0;
 }
