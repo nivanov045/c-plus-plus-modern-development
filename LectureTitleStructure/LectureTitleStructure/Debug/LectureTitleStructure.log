@@ -1,3 +1,0 @@
-﻿  Source.cpp
-c:\users\n\dropbox\coursera\c-plus-plus-modern-development\lecturetitlestructure\lecturetitlestructure\source.cpp(46): error C2664: 'LectureTitle::LectureTitle(LectureTitle &&)': cannot convert argument 2 from 'Week' to 'Course'
-  c:\users\n\dropbox\coursera\c-plus-plus-modern-development\lecturetitlestructure\lecturetitlestructure\source.cpp(50): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
