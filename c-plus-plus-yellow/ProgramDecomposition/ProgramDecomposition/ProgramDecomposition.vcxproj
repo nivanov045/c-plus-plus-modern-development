@@ -115,8 +115,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="correct.cpp" />
+    <ClCompile Include="bus_manager.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="query.cpp" />
+    <ClCompile Include="responses.cpp" />
     <ClCompile Include="starter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bus_manager.h" />
+    <ClInclude Include="query.h" />
+    <ClInclude Include="responses.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
