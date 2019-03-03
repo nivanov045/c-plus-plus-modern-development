@@ -1,2 +1,6 @@
-﻿  starter.cpp
+﻿  bus_manager.cpp
+  main.cpp
+  query.cpp
+  responses.cpp
+  Generating Code...
   ProgramDecomposition.vcxproj -> C:\Users\N\source\repos\C-plus-plus-modern-development\c-plus-plus-yellow\ProgramDecomposition\Debug\ProgramDecomposition.exe

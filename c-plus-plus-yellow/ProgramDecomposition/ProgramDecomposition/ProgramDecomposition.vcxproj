@@ -119,7 +119,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="query.cpp" />
     <ClCompile Include="responses.cpp" />
-    <ClCompile Include="starter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bus_manager.h" />

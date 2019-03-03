@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="starter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="query.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
