@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WordSplitting", "WordSplitting\WordSplitting.vcxproj", "{363C5740-D562-4021-8F93-F090AC2C95EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Debug|x64.ActiveCfg = Debug|x64
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Debug|x64.Build.0 = Debug|x64
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Debug|x86.ActiveCfg = Debug|Win32
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Debug|x86.Build.0 = Debug|Win32
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Release|x64.ActiveCfg = Release|x64
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Release|x64.Build.0 = Release|x64
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Release|x86.ActiveCfg = Release|Win32
+		{363C5740-D562-4021-8F93-F090AC2C95EF}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72832F4D-654E-4F64-9C29-5DDDD6D55171}
+	EndGlobalSection
+EndGlobal
