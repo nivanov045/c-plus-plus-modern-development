@@ -3,9 +3,13 @@
 
 #include <algorithm>
 #include <numeric>
+#include <iomanip>
 using namespace std;
 
-#define SORT_BY(field)  // Реализуйте этот макрос, а также необходимые операторы для классов Date и Time
+#define SORT_BY(field)                                  \
+  [](const AirlineTicket& lhs, const AirlineTicket& rhs) { \
+    return lhs.field < rhs.field;                         \
+  }                                                       
 
 bool operator< (const Date& lDate, const Date& rDate) { 
   return  lDate.year < rDate.year || 
@@ -13,10 +17,32 @@ bool operator< (const Date& lDate, const Date& rDate) {
                                        lDate.month == rDate.month && lDate.day < rDate.day); 
 }
 
+bool operator== (const Date& lDate, const Date& rDate) { 
+  return !(lDate < rDate) && !(rDate < lDate);
+}
+
 bool operator< (const Time& lTime, const Time& rTime)
 {
   return  lTime.hours < rTime.hours ||
           lTime.hours == rTime.hours && lTime.minutes < rTime.minutes;
+}
+
+bool operator== (const Time& lTime, const Time& rTime)
+{
+  return !(lTime < rTime) && !(rTime < lTime);
+}
+
+ostream& operator<<(ostream& stream, const Date& d)
+{
+  stream << setw(4) << setfill('0') << d.year << "-" << setw(2) << setfill('0') << d.month <<
+    "-" << setw(2) << setfill('0') << d.day;
+  return stream;
+}
+
+ostream& operator<<(ostream& stream, const Time& t)
+{
+  stream << setw(2) << setfill('0') << t.hours << ":" << setw(2) << setfill('0') << t.minutes;
+  return stream;
 }
 
 void TestSortBy() {
@@ -27,7 +53,7 @@ void TestSortBy() {
     {"PMI", "DME", "Iberia",    {2018, 2,  8}, {23, 00}, {2018, 2,  9}, { 3, 30}, 9000},
     {"CDG", "SVO", "AirFrance", {2018, 3,  1}, {13, 00}, {2018, 3,  1}, {17, 30}, 8000},
   };
-
+  
   sort(begin(tixs), end(tixs), SORT_BY(price));
   ASSERT_EQUAL(tixs.front().price, 1200);
   ASSERT_EQUAL(tixs.back().price, 9000);

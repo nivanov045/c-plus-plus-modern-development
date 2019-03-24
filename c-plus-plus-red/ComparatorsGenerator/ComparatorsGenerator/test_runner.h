@@ -7,6 +7,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include "airline_ticket.h"
 
 using namespace std;
 
