@@ -1,56 +1,94 @@
 #pragma once
 
-#include <cstdlib>
+#include <algorithm>
+using namespace std;
 
-// Реализуйте шаблон SimpleVector
 template <typename T>
 class SimpleVector {
 public:
-  SimpleVector(): _begin(new T[0]), _end(_begin), _capacity(0) {}
+  SimpleVector() = default;
+  explicit SimpleVector(size_t size);
+  ~SimpleVector();
 
-  explicit SimpleVector(size_t size) : _begin(new T[size]), _end(_begin + size), _capacity(size) {}
+  void operator=(const SimpleVector& rhs);
 
-  ~SimpleVector() { delete[] _begin; }
+  T& operator[](size_t index);
 
-  T& operator[](size_t index) { return _begin[index]; }
+  T* begin();
+  T* end();
 
-  T* begin() { return _begin; }
-  T* end() { return _end; }  
-  
-  const T* begin() const { return _begin; }
-  T* end() const { return _end; }
-
-  size_t Size() const { return _end - _begin; }
-  size_t Capacity() const { return _capacity; }
-  
-  void PushBack(const T& value)
-  {
-    if (Capacity() == 0)
-      resize(1u);
-    if (Size() == Capacity()) {
-      resize(Capacity() * 2);
-    }
-    *_end = value;
-    ++_end;
-  }
+  size_t Size() const;
+  size_t Capacity() const;
+  void PushBack(const T& value);
 
 private:
-  void resize(size_t newCapacity)
-  {
-    if (newCapacity < Capacity())
-      return;
-    T* newBegin = new T[newCapacity];
-    for (size_t i = 0; i != Size(); ++i) {
-      newBegin[i] = _begin[i];
-    }
-    const auto size = Size();
-    delete[] _begin;
-    _begin = newBegin;
-    _end = _begin + size;
-    _capacity = newCapacity;
-  }
-  // Добавьте поля для хранения данных вектора
-  T* _begin;
-  T* _end;
-  size_t _capacity;
+  T* data = nullptr;
+  size_t size = 0;
+  size_t capacity = 0;
 };
+
+template <typename T>
+SimpleVector<T>::SimpleVector(size_t size)
+  : data(new T[size])
+  , size(size)
+  , capacity(size)
+{
+}
+
+template <typename T>
+SimpleVector<T>::~SimpleVector() {
+  delete[] data;
+}
+
+template <typename T>
+void SimpleVector<T>::operator=(const SimpleVector& rhs)
+{
+  /*if (rhs.size <= capacity) {
+    copy(rhs.begin(), rhs.end(), begin());
+    size = rhs.size;
+  }
+  else */{
+    SimpleVector<T> tmp(rhs);
+    swap(tmp.data, data);
+    swap(tmp.size, size);
+    swap(tmp.capacity, capacity);
+  }
+}
+
+template <typename T>
+T& SimpleVector<T>::operator[](size_t index) {
+  return data[index];
+}
+
+template <typename T>
+size_t SimpleVector<T>::Size() const {
+  return size;
+}
+
+template <typename T>
+size_t SimpleVector<T>::Capacity() const {
+  return capacity;
+}
+
+template <typename T>
+void SimpleVector<T>::PushBack(const T& value) {
+  if (size >= capacity) {
+    auto new_cap = capacity == 0 ? 1 : 2 * capacity;
+    auto new_data = new T[new_cap];
+    copy(begin(), end(), new_data);
+    delete[] data;
+    data = new_data;
+    capacity = new_cap;
+  }
+  data[size++] = value;
+}
+
+template <typename T>
+T* SimpleVector<T>::begin() {
+  return data;
+}
+
+template <typename T>
+T* SimpleVector<T>::end() {
+  return data + size;
+}
