@@ -43,11 +43,11 @@ SimpleVector<T>::~SimpleVector() {
 template <typename T>
 void SimpleVector<T>::operator=(const SimpleVector& rhs)
 {
-  /*if (rhs.size <= capacity) {
+  if (rhs.size <= capacity) {
     copy(rhs.begin(), rhs.end(), begin());
     size = rhs.size;
   }
-  else */{
+  else {
     SimpleVector<T> tmp(rhs);
     swap(tmp.data, data);
     swap(tmp.size, size);

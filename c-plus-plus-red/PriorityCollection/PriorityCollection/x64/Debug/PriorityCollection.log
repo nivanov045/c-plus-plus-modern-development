@@ -1,0 +1,15 @@
+﻿  priority_collection_2.cpp
+c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-red\prioritycollection\prioritycollection\priority_collection_2.cpp(19): warning C4267: 'initializing': conversion from 'size_t' to 'PriorityCollection<StringNonCopyable>::Id', possible loss of data
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-red\prioritycollection\prioritycollection\priority_collection_2.cpp(18): note: while compiling class template member function 'PriorityCollection<StringNonCopyable>::Id PriorityCollection<StringNonCopyable>::Add(T)'
+          with
+          [
+              T=StringNonCopyable
+          ]
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-red\prioritycollection\prioritycollection\priority_collection_2.cpp(88): note: see reference to function template instantiation 'PriorityCollection<StringNonCopyable>::Id PriorityCollection<StringNonCopyable>::Add(T)' being compiled
+          with
+          [
+              T=StringNonCopyable
+          ]
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-red\prioritycollection\prioritycollection\priority_collection_2.cpp(87): note: see reference to class template instantiation 'PriorityCollection<StringNonCopyable>' being compiled
+c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-red\prioritycollection\prioritycollection\priority_collection_2.cpp(19): warning C4267: 'initializing': conversion from 'size_t' to 'const PriorityCollection<StringNonCopyable>::Id', possible loss of data
+  PriorityCollection.vcxproj -> C:\Users\N\source\repos\C-plus-plus-modern-development\c-plus-plus-red\PriorityCollection\x64\Debug\PriorityCollection.exe
