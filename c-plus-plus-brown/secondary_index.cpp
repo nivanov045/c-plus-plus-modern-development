@@ -17,39 +17,49 @@ struct Record {
   int karma;
 };
 
-class Database {
+struct DataElement
+{
+  Record record;
+  multimap<string, Record*>::iterator userIdx;
+  multimap<int, Record*>::iterator timestampIdx;
+  multimap<int, Record*>::iterator karmaIdx;
+};
+
+class Database
+{
 public:
   bool Put(const Record& record)
   {
-    if (_data.count(record.id))
+    const auto& resOfInsert = _data.insert({ record.id, {record, {}, {}, {}} });
+    auto it = resOfInsert.first;
+    if (!resOfInsert.second)
       return false;
-    _data.insert({
-      record.id,
-      make_tuple
-      (
-        record, _secondaryUserIdx.insert({record.user, record.id}),
-        _secondaryTimestampIdx.insert({record.timestamp, record.id}),
-        _secondaryKarmaIdx.insert({record.karma, record.id})
-      )
-    });
+    auto &data = it->second;
+    auto recPointer = &data.record;
+
+    data.userIdx = _secondaryUserIdx.insert({ record.user, recPointer });
+    data.timestampIdx = _secondaryTimestampIdx.insert({ record.timestamp, recPointer });
+    data.karmaIdx = _secondaryKarmaIdx.insert({ record.karma, recPointer });
     return true;
   }
 
   const Record* GetById(const ID& id) const
   {
-    if (_data.count(id))
-      return &get<0>(_data.at(id));
+    auto it = _data.find(id);
+    if (it != _data.end())
+      return &it->second.record;
     return nullptr;
   }
 
   bool Erase(const ID& id)
   {
-    if (!_data.count(id))
+    auto it = _data.find(id);
+    if (it == _data.end())
       return false;
-    auto dataElement = _data.at(id);
-    _secondaryUserIdx.erase(get<1>(dataElement));
-    _secondaryTimestampIdx.erase(get<2>(dataElement));
-    _secondaryKarmaIdx.erase(get<3>(dataElement));
+    const auto& secondaryIdxs = it->second;
+    _secondaryUserIdx.erase(secondaryIdxs.userIdx);
+    _secondaryTimestampIdx.erase(secondaryIdxs.timestampIdx);
+    _secondaryKarmaIdx.erase(secondaryIdxs.karmaIdx);
     _data.erase(id);
     return true;
   }
@@ -58,8 +68,7 @@ public:
   void RangeByTimestamp(int low, int high, Callback callback) const
   {
     for (auto it = _secondaryTimestampIdx.lower_bound(low); it != _secondaryTimestampIdx.upper_bound(high); ++it) {
-      const auto& rec = get<0>(_data.at(it->second));
-      if (!callback(rec))
+      if (!callback(*it->second))
         return;
     }
   }
@@ -68,8 +77,7 @@ public:
   void RangeByKarma(int low, int high, Callback callback) const
   {
     for (auto it = _secondaryKarmaIdx.lower_bound(low); it != _secondaryKarmaIdx.upper_bound(high); ++it) {
-      const auto& rec = get<0>(_data.at(it->second));
-      if (!callback(rec))
+      if (!callback(*it->second))
         return;
     }
   }
@@ -77,17 +85,18 @@ public:
   template <typename Callback>
   void AllByUser(const string& user, Callback callback) const
   {
-    for (auto it = _secondaryUserIdx.lower_bound(user); it != _secondaryUserIdx.upper_bound(user); ++it) {
-      const auto& rec = get<0>(_data.at(it->second));
-      if (!callback(rec))
+    auto er = _secondaryUserIdx.equal_range(user);
+    for (auto it = er.first; it != er.second; ++it) {
+      if (!callback(*it->second))
         return;
     }
   }
+
 private:
-  map<ID, tuple<Record, multimap<string, ID>::iterator, multimap<int, ID>::iterator, multimap<int, ID>::iterator>> _data;
-  multimap<int, ID> _secondaryKarmaIdx;
-  multimap<int, ID> _secondaryTimestampIdx;
-  multimap<string, ID> _secondaryUserIdx;
+  unordered_map<ID, DataElement> _data;
+  multimap<int, Record*> _secondaryKarmaIdx;
+  multimap<int, Record*> _secondaryTimestampIdx;
+  multimap<string, Record*> _secondaryUserIdx;
 };
 
 void TestRangeBoundaries() {
