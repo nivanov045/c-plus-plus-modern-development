@@ -20,9 +20,9 @@ struct Record {
 struct DataElement
 {
   Record record;
-  multimap<string, Record*>::iterator userIdx;
-  multimap<int, Record*>::iterator timestampIdx;
-  multimap<int, Record*>::iterator karmaIdx;
+  multimap<string, const Record*>::iterator userIdx;
+  multimap<int, const Record*>::iterator timestampIdx;
+  multimap<int, const Record*>::iterator karmaIdx;
 };
 
 class Database
@@ -30,11 +30,11 @@ class Database
 public:
   bool Put(const Record& record)
   {
-    const auto& resOfInsert = _data.insert({ record.id, {record, {}, {}, {}} });
-    auto it = resOfInsert.first;
+    const auto resOfInsert = _data.insert({ record.id, {record, {}, {}, {}} });
     if (!resOfInsert.second)
       return false;
-    auto &data = it->second;
+    auto it = resOfInsert.first;
+    auto& data = it->second;
     auto recPointer = &data.record;
 
     data.userIdx = _secondaryUserIdx.insert({ record.user, recPointer });
@@ -60,14 +60,16 @@ public:
     _secondaryUserIdx.erase(secondaryIdxs.userIdx);
     _secondaryTimestampIdx.erase(secondaryIdxs.timestampIdx);
     _secondaryKarmaIdx.erase(secondaryIdxs.karmaIdx);
-    _data.erase(id);
+    _data.erase(it);
     return true;
   }
 
   template <typename Callback>
   void RangeByTimestamp(int low, int high, Callback callback) const
   {
-    for (auto it = _secondaryTimestampIdx.lower_bound(low); it != _secondaryTimestampIdx.upper_bound(high); ++it) {
+    auto lb = _secondaryTimestampIdx.lower_bound(low);
+    auto ub = _secondaryTimestampIdx.upper_bound(high);
+    for (auto it = lb; it != ub; ++it) {
       if (!callback(*it->second))
         return;
     }
@@ -76,7 +78,9 @@ public:
   template <typename Callback>
   void RangeByKarma(int low, int high, Callback callback) const
   {
-    for (auto it = _secondaryKarmaIdx.lower_bound(low); it != _secondaryKarmaIdx.upper_bound(high); ++it) {
+    auto lb = _secondaryKarmaIdx.lower_bound(low);
+    auto ub = _secondaryKarmaIdx.upper_bound(high);
+    for (auto it = lb; it != ub; ++it) {
       if (!callback(*it->second))
         return;
     }
@@ -94,9 +98,9 @@ public:
 
 private:
   unordered_map<ID, DataElement> _data;
-  multimap<int, Record*> _secondaryKarmaIdx;
-  multimap<int, Record*> _secondaryTimestampIdx;
-  multimap<string, Record*> _secondaryUserIdx;
+  multimap<int, const Record*> _secondaryKarmaIdx;
+  multimap<int, const Record*> _secondaryTimestampIdx;
+  multimap<string, const Record*> _secondaryUserIdx;
 };
 
 void TestRangeBoundaries() {
