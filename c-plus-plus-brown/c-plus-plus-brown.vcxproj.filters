@@ -21,9 +21,15 @@
     <ClInclude Include="test_runner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ini.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="secondary_index.cpp">
+    <ClCompile Include="test_ini.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ini.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
