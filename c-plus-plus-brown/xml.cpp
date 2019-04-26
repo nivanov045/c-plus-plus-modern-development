@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+namespace Xml {
+
 pair<string_view, string_view> Split(string_view line, char by) {
   size_t pos = line.find(by);
   string_view left = line.substr(0, pos);
@@ -37,7 +39,7 @@ Node LoadNode(istream& input) {
   getline(input, root_name);
 
   Node root(root_name.substr(1, root_name.size() - 2), {});
-  for (string line; getline(input, line) && Lstrip(line)[1] != '/'; ) {
+  for (string line; getline(input, line) && line[1] != '/'; ) {
     auto [node_name, attrs] = Split(Lstrip(line), ' ');
     attrs = Split(attrs, '>').first;
     unordered_map<string, string> node_attrs;
@@ -83,3 +85,4 @@ string_view Node::Name() const {
   return name;
 }
 
+}
