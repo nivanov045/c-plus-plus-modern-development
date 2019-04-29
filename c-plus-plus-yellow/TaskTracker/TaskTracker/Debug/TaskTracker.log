@@ -1,3 +1,0 @@
-﻿  Source.cpp
-c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-yellow\tasktracker\tasktracker\source.cpp(23): warning C4172: returning address of local variable or temporary
-  TaskTracker.vcxproj -> C:\Users\N\source\repos\C-plus-plus-modern-development\c-plus-plus-yellow\TaskTracker\Debug\TaskTracker.exe
