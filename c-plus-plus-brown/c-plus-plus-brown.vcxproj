@@ -18,6 +18,12 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DoubleDispatch\test_runner.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="comment_server.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{E822BD8E-F057-4707-B899-189AAED27B68}</ProjectGuid>
@@ -115,17 +121,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="json.h" />
-    <ClInclude Include="profile.h" />
-    <ClInclude Include="test_runner.h" />
-    <ClInclude Include="xml.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="json.cpp" />
-    <ClCompile Include="refactoring.cpp" />
-    <ClCompile Include="xml.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
