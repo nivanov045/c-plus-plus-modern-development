@@ -1,2 +1,6 @@
-﻿  comment_server.cpp
+﻿  polynomial.cpp
+c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-brown\polynomial.cpp(64): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-brown\polynomial.cpp(62): note: while compiling class template member function 'int Polynomial<double>::Degree(void) const'
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-brown\polynomial.cpp(151): note: see reference to function template instantiation 'int Polynomial<double>::Degree(void) const' being compiled
+  c:\users\n\source\repos\c-plus-plus-modern-development\c-plus-plus-brown\polynomial.cpp(150): note: see reference to class template instantiation 'Polynomial<double>' being compiled
   c-plus-plus-brown.vcxproj -> C:\Users\N\source\repos\C-plus-plus-modern-development\c-plus-plus-brown\x64\Debug\c-plus-plus-brown.exe

@@ -19,10 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DoubleDispatch\test_runner.h" />
+    <ClInclude Include="profile.h" />
+    <ClInclude Include="test_runner.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="comment_server.cpp" />
+    <ClCompile Include="polynomial.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
